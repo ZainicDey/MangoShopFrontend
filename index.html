@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MangoShopBD</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i href="index.html" class="fa-solid fa-store"></i> MangoShopBD
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <div id="navervitore" style="display: flex;">
+
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll"
+        data-image-src="img/mango.jpg">
+        <form class="d-flex tm-search-form" onsubmit="searched(event)">
+            <input id="search-input" class="form-control tm-search-input" type="search" placeholder="Search"
+                aria-label="Search">
+            <button class="btn btn-outline-success tm-search-btn" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-12 tm-text-primary text-center">Mango List</h2>
+        </div>
+        <div class="row tm-mb-90 tm-gallery" id="mango-list">
+            <!-- Mango items will be injected here -->
+        </div>
+    </div>
+
+    <div class="row tm-mb-90">
+        <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
+            <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
+            <div class="tm-paging d-flex">
+                <a href="javascript:void(0);" class="active tm-paging-link">1</a>
+                <a href="javascript:void(0);" class="tm-paging-link">2</a>
+                <a href="javascript:void(0);" class="tm-paging-link">3</a>
+                <a href="javascript:void(0);" class="tm-paging-link">4</a>
+            </div>
+            <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Next Page</a>
+        </div>
+    </div>
+
+    <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+        <div class="container-fluid tm-container-small">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">About MangoShopBD</h3>
+                    <p>Catalog-Z is free <a rel="sponsored" href="https://v5.getbootstrap.com/">Bootstrap 5</a> Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Vero natus voluptas odit fugit nihil porro?
+                        Fuga, nisi! Laborum, quas esse natus porro totam ipsam atque omnis in maiores earum placeat?</p>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">Our Links</h3>
+                    <ul class="tm-footer-links pl-0">
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+                    <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
+                        <li class="mb-2"><a href="https://facebook.com"><i class="fab fa-facebook"></i></a></li>
+                        <li class="mb-2"><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
+                        <li class="mb-2"><a href="https://instagram.com"><i class="fab fa-instagram"></i></a></li>
+                        <li class="mb-2"><a href="https://pinterest.com"><i class="fab fa-pinterest"></i></a></li>
+                    </ul>
+                    <a href="#" class="tm-text-gray text-right d-block mb-2">Terms of Use</a>
+                    <a href="#" class="tm-text-gray text-right d-block">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-12 px-5 mb-3">
+                    Copyright 2024 ManghoShopBD Company. All rights reserved.
+                </div>
+                <div class="col-lg-4 col-md-5 col-12 px-5 text-right">
+                    Designed by <a href="" class="tm-text-gray" rel="sponsored" target="_parent">Zainic</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mangoListContainer = document.getElementById('mango-list');
+
+            const searched = (event) => {
+                event.preventDefault();
+
+                const searchInput = document.getElementById('search-input').value.trim(); // Get search input and trim whitespace
+
+                fetch(`https://mangoshopbd.onrender.com/mangoes/?search=${searchInput}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Fetched data:', data); // Log fetched data
+
+                        // Clear previous content if any
+                        mangoListContainer.innerHTML = '';
+
+                        // Iterate over each mango item
+                        data.forEach(mango => {
+                            // Create a div for each mango item
+                            const mangoItem = document.createElement('div');
+                            mangoItem.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'mb-4'); // Bootstrap column classes
+
+                            // Create mango item HTML structure
+                            mangoItem.innerHTML = `
+                        <div class="tm-mango-item">
+                            <figure class="effect-ming tm-video-item">
+                                <img src="${mango.image}" alt="${mango.name}" class="img-fluid tm-mango-image">
+                                <figcaption class="tm-mango-caption">
+                                    <h2 class="tm-mango-title">${mango.name}</h2>
+                                    <a href="detail.html?id=${mango.id}" class="tm-mango-link">View more</a>
+                                </figcaption>
+                            </figure>
+                            <div class="tm-mango-details">
+                                <p class="tm-mango-description">${mango.description}</p>
+                                <div class="tm-mango-meta">
+                                    <span class="tm-mango-price">Price: ${mango.price} BDT</span>
+                                    <span class="tm-mango-quantity">Quantity: ${mango.quantity}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                            // Append mango item to mango list container
+                            mangoListContainer.appendChild(mangoItem);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching mangoes:', error);
+                    });
+            };
+
+            // Optional: You can also add event listeners programmatically if needed
+            const searchForm = document.querySelector('.tm-search-form');
+            searchForm.addEventListener('submit', searched);
+        });
+        update();
+
+        function update() {
+            const navervitore = document.getElementById('navervitore');
+            const token = localStorage.getItem('authToken');
+
+            if (token) {
+                navervitore.innerHTML = `
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" id="logout-link" href="#">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" id="history-link" href="profile.html">Buy History</a>
+                    </li>
+                `;
+
+                document.getElementById('logout-link').addEventListener('click', function () {
+                    fetch('https://mangoshopbd.onrender.com/logout/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Token ${token}`
+                        }
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Logout failed');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            localStorage.removeItem('authToken');
+                            localStorage.removeItem('userId');
+                            alert('Successfully logged out');
+                            window.location.reload(); // Reload the page
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            localStorage.removeItem('authToken');
+                            localStorage.removeItem('userId');
+                            alert('Logout successful, press ok to reload');
+                            window.location.reload(); // Reload the page even on error
+                        });
+                });
+            } else {
+                navervitore.innerHTML = `
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" id="auth-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-2" href="adminlogin.html">Admin Login</a>
+                    </li>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const mangoListContainer = document.getElementById('mango-list');
+
+            fetch('https://mangoshopbd.onrender.com/mangoes/')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Fetched data:', data); // Log fetched data
+
+                    // Clear previous content if any
+                    mangoListContainer.innerHTML = '';
+
+                    // Iterate over each mango item
+                    data.forEach(mango => {
+                        // Create a div for each mango item
+                        const mangoItem = document.createElement('div');
+                        mangoItem.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'mb-4'); // Bootstrap column classes
+
+                        // Create mango item HTML structure
+                        mangoItem.innerHTML = `
+                            <div class="tm-mango-item">
+                                <figure class="effect-ming tm-video-item">
+                                    <img src="${mango.image}" alt="${mango.name}" class="img-fluid tm-mango-image">
+                                    <figcaption class="tm-mango-caption">
+                                        <h2 class="tm-mango-title">${mango.name}</h2>
+                                        <a href="detail.html?id=${mango.id}" class="tm-mango-link">View more</a>
+                                    </figcaption>
+                                </figure>
+                                <div class="tm-mango-details">
+                                    <p class="tm-mango-description">${mango.description}</p>
+                                    <div class="tm-mango-meta">
+                                        <span class="tm-mango-price">Price: ${mango.price} BDT</span>
+                                        <span class="tm-mango-quantity">Quantity: ${mango.quantity}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        // Append mango item to mango list container
+                        mangoListContainer.appendChild(mangoItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching mangoes:', error);
+                });
+        });
+    </script>
+
+
+    <script src="js/plugins.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $('body').addClass('loaded');
+        });
+    </script>
+</body>
+
+</html>

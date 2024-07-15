@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .login-form {
+            max-width: 350px;
+            margin: auto;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-form">
+            <h2 class="text-center">Admin Login</h2>
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional, for advanced features) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const handleLogin = (event) => {
+            event.preventDefault();
+            const form = document.getElementById('login-form');
+            const formData = new FormData(form);
+
+            const loginFormData = {
+                username: formData.get('username'),
+                password: formData.get('password')
+            };
+
+            fetch('https://mangoshopbd.onrender.com/login/', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(loginFormData)
+            })
+                .then((res) => {
+                    if (!res.ok) {
+                        return res.json().then((errorData) => {
+                            throw new Error(errorData.message || 'Login failed');
+                        });
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                    if (data.token) {
+                        // Assuming you have a way to check if the token is active
+                        localStorage.setItem("authToken", data.token);
+                        localStorage.setItem("userId", data.user_id);
+                        // Redirect to admin_dashboard.html after successful login
+                        window.location.href = 'admin_dashboard.html';
+                    } else {
+                        alert('Token is not active. Please verify your email.');
+                        throw new Error('Token not received or not active');
+                    }
+                })
+                .catch((error) => {
+                    alert('Login failed. Please try again later or verify your email.');
+                    console.error('Error:', error);
+                });
+        };
+
+    </script>
+</body>
+
+</html>

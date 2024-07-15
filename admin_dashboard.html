@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Admin Dashboard</h1>
+        <hr>
+        <div style="border-radius: 30px; background-color: antiquewhite; text-align: center; width: 50%; margin: auto;">
+            <h2><a href="https://mangoshopbd.onrender.com/admin">Go to another admin panel</a></h2>
+        </div>
+        <!-- Add Mango Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Add Mango</h2>
+            </div>
+            <div class="card-body">
+                <form id="add-mango-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price (BDT)</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control-file" id="image" name="image" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="seller">Select Seller</label>
+                        <select class="form-control" id="seller" name="seller" required>
+                            <!-- Populate with seller options -->
+                            <option value="1">Seller 1</option>
+                            <option value="2">Seller 2</option>
+                            <!-- Add more sellers as needed -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Mango</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Order Management Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Order Management</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Mango</th>
+                            <th>Quantity</th>
+                            <th>Status</th>
+                            <th>Change Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-list">
+                        <tr>
+                            <td>1</td>
+                            <td>User 1</td>
+                            <td>Mango 1</td>
+                            <td>2</td>
+                            <td>
+                                <select class="order-status" data-order-id="1">
+                                    <option value="Pending">Pending</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </td>
+                            <td>
+                                <!-- Other actions -->
+                            </td>
+                        </tr>
+                        <!-- More orders as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+
+</html>
